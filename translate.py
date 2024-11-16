@@ -31,7 +31,13 @@ def main():
 
     # Use the arguments in your program logic
     ts = str(datetime.now().strftime("%Y%m%d_%H%M%S"))  
-    output_path = f"{OUTPUT_FOLDER}/{language}/{ts}.txt"
+    sub_folder = ""
+    print(f"Input Path: {input_path}\nInput: {input}")
+    if text == "":
+        sub_folder = "list"
+    else:
+        sub_folder = "text"
+    output_path = f"{OUTPUT_FOLDER}/{sub_folder}/{language}/{ts}.txt"
     create_text_file(output_path)
     if verbose:
         print(f"Input file: {input_path}")
@@ -71,6 +77,8 @@ def translate_file(input_path: str, language: str, output_path: str):
 def create_text_file(file_path):
     """Create a text file with the specified content. Overwrites if it exists."""
     try:
+        # Create dirs
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
         with open(file_path, 'w') as file:  # 'w' mode creates or overwrites the file
             file.write("")
         print(f"File created: {file_path}")
