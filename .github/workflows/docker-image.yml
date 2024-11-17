@@ -14,7 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Checkout repo
     - uses: actions/checkout@v4
+    # Step 2: Build the docker container
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag just-translate:latest
-      run: publish_docker.sh
+    # Step 3: Run the publish docker image script
+    - name: Run publish_docker.sh
+      run: ./publish_docker.sh
