@@ -19,6 +19,9 @@ jobs:
     # Step 2: Build the docker container
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag sidneysee/just-translate:latest
-    # Step 3: Run the publish docker image script
+    # Step 3: Login
+    - name: Login to Docker
+      run: echo "${{ secrets.PASSWORD }}" | docker login -u "${{ secrets.USERNAME }}" --password-stdin
+    # Step 3: Publish docker image
     - name: Push Container
       run: docker push sidneysee/just-translate:latest
