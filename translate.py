@@ -1,4 +1,5 @@
 from Translator_mock import *
+from Translator import *
 import argparse
 import os
 from datetime import datetime
@@ -53,7 +54,8 @@ def main():
     # TODO: Save responses into specific langauge folder and clean up single translation more than 10
 
 def translate_text(text: str, lan: str)-> str:
-    result = translate(text=text, lan=lan)
+    translator = Translator(language=lan)
+    result = translator.translate(text=text)
     print(f"{text} in {lan} is: {result}")
     return str(result)
 
@@ -63,9 +65,10 @@ def translate_file(input_path: str, language: str, output_path: str):
     lines = separate_file(input_file_path=input_path)
     if lines == []:
         save_result(output_file_path=output_path,response=f"Input file Empty or Nonexistant{input_path}")
+    translator = Translator(language=language)
     for i in range(len(lines)):
         print(f"{i+1}: DE: {lines[i]}")
-        translation = translate(lines[i],lan=language)
+        translation = translator.translate(lines[i])
         if not save_result(output_file_path=output_path,response=translation):
             print("Error saving output file")
 
