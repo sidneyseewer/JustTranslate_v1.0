@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v4
     # Step 2: Build the docker container
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag just-translate:latest
+      run: docker build . --file Dockerfile --tag sidneysee/just-translate:latest
     # Step 3: Run the publish docker image script
-    - name: Run publish_docker.sh
-      run: ./publish_docker.sh
+    - name: Push Container
+      run: docker push sidneysee/just-translate:latest
