@@ -1,5 +1,6 @@
 from Translator_mock import *
-from Translator import *
+#from Translator import *
+from Translator2 import *
 import argparse
 import os
 from datetime import datetime
@@ -40,9 +41,9 @@ def main():
         sub_folder = "text"
     output_path = f"{OUTPUT_FOLDER}/{sub_folder}/{language}/{ts}.txt"
     create_text_file(output_path)
-    if verbose:
+    if verbose and text == "":
         print(f"Input file: {input_path}")
-        print(f"Output file: {output_path}")
+    print(f"Output file: {output_path}")
 
     if not(text==""):
         translation = translate_text(text=text, lan=language)
@@ -54,7 +55,8 @@ def main():
     # TODO: Save responses into specific langauge folder and clean up single translation more than 10
 
 def translate_text(text: str, lan: str)-> str:
-    translator = Translator(language=lan)
+    print(f"Inside Translate_text function")
+    translator = Translator2(language=lan)
     result = translator.translate(text=text)
     print(f"{text} in {lan} is: {result}")
     return str(result)
@@ -64,8 +66,9 @@ def translate_file(input_path: str, language: str, output_path: str):
     print(f"Processing file {input_path}...")
     lines = separate_file(input_file_path=input_path)
     if lines == []:
-        save_result(output_file_path=output_path,response=f"Input file Empty or Nonexistant{input_path}")
-    translator = Translator(language=language)
+#        save_result(output_file_path=output_path,response=f"Input file Empty or Nonexistant{input_path}")
+        save_result(output_file_path=output_path)
+    translator = Translator2(language=language)
     for i in range(len(lines)):
         print(f"{i+1}: DE: {lines[i]}")
         translation = translator.translate(lines[i])
