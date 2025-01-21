@@ -1,4 +1,5 @@
 import torch
+import GPUtil
 
 def check_cuda():
     print("Checking CUDA installation...\n")
@@ -27,4 +28,5 @@ def check_cuda():
         print("CUDA is not available. Please check your installation.")
 
 if __name__ == "__main__":
+#    print(f"GPU available: {GPUtil.getAvailable()}")
     check_cuda()
